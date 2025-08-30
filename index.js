@@ -31,7 +31,6 @@ app.get("/testListing",async (req, res) => {
     .catch((err)=>console.log(err));
     console.log("Sample was save");
     res.send("SuccessFul testing");
-    
 });
 
 app.listen(8080, (req, res) => {
