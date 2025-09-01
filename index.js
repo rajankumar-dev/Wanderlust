@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const Listing = require("./models/listing");
 const path = require("path");
+const methodOverride = require("method-override");
 const app = express();
 
 //Set up EJS
@@ -9,6 +10,7 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 // Set up for encodded data
 app.use(express.urlencoded({extended: true}));
+app.use(methodOverride("_method"));
 
 
 //DataBase Setup
@@ -52,6 +54,19 @@ app.post("/listings", async (req, res) => {
     res.redirect("/listings");
 });
 
+//Edit Route
+app.get("/listings/:id/edit", async (req, res) => {
+    let {id} = req.params;
+    const listing = await Listing.findById(id);
+    res.render("listings/edit.ejs",{listing});
+});
+
+//Update Route
+app.put("/listings/:id", async (req, res) => {
+    let {id} = req.params;
+    await Listing.findByIdAndUpdate(id,{...req.body.listing});
+    res.redirect("/listings");
+})
 
 //Test Listing
 // app.get("/testListing",async (req, res) => {
