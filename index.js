@@ -32,7 +32,7 @@ app.get("/listings", async (req, res) => {
 });
 
 //New Route
-app.get("/listings/:id", async (req, res) => {
+app.get("/listings/new", (req, res) => {
     res.render("listings/new.ejs");
 });
 
