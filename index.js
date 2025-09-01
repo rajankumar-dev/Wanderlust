@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const Listing = require("./models/listing");
 const path = require("path");
 const methodOverride = require("method-override");
+const ejsMate = require("ejs-mate");
 const app = express();
 
 //Set up EJS
@@ -11,6 +12,8 @@ app.set("views", path.join(__dirname, "views"));
 // Set up for encodded data
 app.use(express.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
+app.engine("ejs", ejsMate);
+app.use(express.static(path.join(__dirname, "public")));
 
 
 //DataBase Setup
