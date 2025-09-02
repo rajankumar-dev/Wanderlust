@@ -1,26 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wanderlnn</title>
-</head>
+<% layout('layouts/boilerPlate') %>
 <body>
     <h3>create a new listing</h3>
     <form method="POST" action="/listings">
         <input type="text" placeholder="Enter title" name="listing[title]">
-        <br>
+        <br><br>
         <textarea placeholder="Enter description" name="listing[description]"></textarea>
-        <br>
+        <br><br>
         <input type="text" placeholder="Enter image URL/link" name="listing[image]">
-        <br>
+        <br><br>
         <input type="number" placeholder="Enter price" name="listing[price]">
-        <br>
+        <br><br>
         <input type="text" placeholder="Enter location" name="listing[location]">
-        <br>
+        <br><br>
         <input type="text" placeholder="Enter country" name="listing[country]">
-        <br>
+        <br><br>
         <button>Add</button>
     </form>
 </body>
-</html>
