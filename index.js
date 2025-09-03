@@ -26,8 +26,9 @@ async function main() {
 }
 
 //Index Route
-app.get("/", (req, res) => {
-    res.send("hello World");
+app.get("/", async (req, res) => {
+    const allListings = await Listing.find({});
+    res.render("listings/index.ejs", {allListings});
 });
 
 //All Listing
