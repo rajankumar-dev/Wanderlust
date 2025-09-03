@@ -39,6 +39,31 @@
     justify-content: center;
     align-items: space-evenly;
 }
+.show-image{
+    height: 40vh;
+}
+.e-d-btn{
+    display: flex;
+}
+.edit-btn a{
+    margin-left: 0.30rem;
+    padding: 0.4rem 2rem;
+    background-color: #fe424d !important;
+    border: none !important;
+}
+.del-btn{
+    padding: 0.4rem 2rem !important;
+
+}
+.card{
+    border-radius: 1rem !important;
+}
+.card img{
+    border-radius: 1rem;
+}
+.body-section{
+    margin-left: 10rem;
+}
     </style>
     
     <!-- Bootstrap -->
@@ -68,18 +93,40 @@
   </div>
 </nav>
 
+
+<div class="body-section">
+        <br>
+    <div class="row">
+    <div class="col-10 offset-2">
     <h3>Listening Details :</h3>
-    <ul>
-        <li><%= listing.title %></li>
-        <li><%= listing.description %></li>
-        <li>&#8377; <%= listing.price.toLocaleString("en-IN") %></li>
-        <li><%= listing.location %></li>
-        <li><%= listing.country %></li>
-    </ul><br>
-    <a href="/listings/<%= listing._id %>/edit">Edit this Listing</a>
-    <form method="POST" action="/listings/<%=listing._id%>?_method=DELETE">
-        <button>Delete Listing</button>
-    </form>
+    <div class="card col-6">
+        <img src="<%= listing.image %>" class="card-img-top show-image" alt="listing_image">
+        <div class="card-body">
+            <p class="card-text">
+                <b><%= listing.title %> <br></b>
+                <%= listing.description %> <br>
+                &#8377; <%= listing.price.toLocaleString("en-IN") %> <br>
+                <%= listing.location %> <br>
+                <%= listing.country %>
+            </p>
+        </div>
+    </div>
+    </div>
+    </div>
+
+    <div class="e-d-btn">
+        <div class="offset-2 mt-3 edit-btn">
+            <a href="/listings/<%= listing._id %>/edit" class="btn btn-dark">Edit</a>
+        </div>
+        <div class="col-2 offset-1 mt-3">
+            <form method="POST" action="/listings/<%=listing._id%>?_method=DELETE">
+            <button class="btn btn-dark del-btn">Delete</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<br><br>
 
     <footer>
     <div class="f-info">
@@ -95,5 +142,6 @@
         </div>
     </div>
 </footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
 </html>
