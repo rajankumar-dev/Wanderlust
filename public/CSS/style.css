@@ -2,6 +2,9 @@ body{
     font-family: "Plus Jakarta Sans", sans-serif !important;
     font-weight: 400 !important;
     font-style: normal !important;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
 }
 
 /* navbar */
@@ -10,8 +13,8 @@ body{
     background-color: white;
 }
 .fa-compass{
-    color: #fe424d;
-    font-size: 2rem;
+    color: #fe424d !important;
+    font-size: 2rem !important;
 }
 .nav-link{
     color: #222222 !important;
@@ -59,3 +62,10 @@ body{
     text-decoration: none !important;
 }
 /* Card Effect */
+.card-img-overlay{
+    opacity: 0;
+}
+.card-img-overlay:hover{
+    opacity: 0.1;
+    background-color: #ebebeb;
+}
