@@ -62,32 +62,38 @@
     <div class="row offset-2">
         <div class="col-8">
     <h3>Edit listing</h3>
-    <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" >
+    <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" novalidate class="needs-validation">
         <div class="mb-3">
             <label for="title" class="form-label">Title</label>
-            <input type="text" id="title" value=" <%= listing.title %> " name="listing[title]" class="form-control">
+            <input type="text" id="title" value=" <%= listing.title %> " name="listing[title]" class="form-control" required>
+            <div class="invalid-feedback">Title should be valid</div>
         </div>
         <div class="mb-3" >
             <label for="description" class="form-label">Description</label>
-            <textarea id="description" class="form-control" name="listing[description]" ><%=listing.description%></textarea>
+            <textarea id="description" class="form-control" name="listing[description]" required><%=listing.description%></textarea>
+            <div class="invalid-feedback">Please enter a short description</div>
         </div>
         <div class="mb-3">
             <label for="image" class="form-label">Enter image</label>
-            <input type="text" id="image" class="form-control" value="<%=listing.image%>" name="listing[image]">
+            <input type="text" id="image" class="form-control" value="<%=listing.image%>" name="listing[image]" required>
+            <div class="invalid-feedback">Please Enter a valid Image</div>
         </div>
         <div class="row">
             <div class="mb-3 col-md-4" >
             <label for="price" class="form-label">Enter price</label>
-            <input type="number" id="price" class="form-control" value="<%=listing.price%>" name="listing[price]">
+            <input type="number" id="price" class="form-control" value="<%=listing.price%>" name="listing[price]" required>
+            <div class="invalid-feedback">Price should be valid</div>
         </div>
         <div class="mb-3 col-md-8">
             <label for="location" class="form-label">Enter Location</label>
-            <input type="text" id="location" class="form-control" value=" <%= listing.location %> " name="listing[location]">
+            <input type="text" id="location" class="form-control" value=" <%= listing.location %> " name="listing[location]" required>
+            <div class="invalid-feedback">Location should be valid</div>
         </div>
         </div>
         <div class="mb-3">
             <label for="country" class="form-label">Enter Country</label>
-            <input type="text" id="country" class="form-control" value=" <%= listing.country %> " name="listing[country]">
+            <input type="text" id="country" class="form-control" value=" <%= listing.country %> " name="listing[country]" required>
+            <div class="invalid-feedback">Country should be valid</div>
         </div>
         <button class="add-btn btn">Edit</button>
         <br><br>
@@ -109,6 +115,27 @@
     </div>
 </footer>
 
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+(() => {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  const forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.from(forms).forEach(form => {
+    form.addEventListener('submit', event => {
+      if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+      }
+
+      form.classList.add('was-validated')
+    }, false)
+  })
+})()
+</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
 </html>
