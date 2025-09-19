@@ -5,6 +5,7 @@ const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const wrapAsync = require("./utils/wrapAsync");
+const ExpressError = require("./utils/ExpressError");
 const app = express();
 
 //Set up EJS
@@ -99,7 +100,9 @@ app.delete("/listings/:id", async (req, res) => {
 // });
 
 app.use((req,res, err,) => {
-    res.send("Somthing went wrong");
+    let {statusCode, message} = err;
+    res.render("error.ejs", {message});
+    // res.status(statusCode).send(message);
 })
 
 app.listen(8080, (req, res) => {
