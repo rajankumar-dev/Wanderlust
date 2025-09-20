@@ -1,0 +1,1 @@
+This Folder[Basic_Relationships] is not related to the project but this is contain the basic Knowledge of Database Relationship.
