@@ -25,6 +25,15 @@ const customerSchema =  new Schema({
         },
     ],
 });
+
+customerSchema.pre("findOneAndDelete", async() => {
+    console.log("Pre Middleware");
+    
+})
+customerSchema.post("findOneAndDelete", async() => {
+    console.log("post Middleware");
+    
+})
 const Customer = mongoose.model("Customer", customerSchema);
 const Order = mongoose.model("Order", orderSchema);
 
