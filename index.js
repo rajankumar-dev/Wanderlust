@@ -14,6 +14,7 @@ const Joi = require('joi');
 
 // Listing Schema from Joi
 const { listingSchema } = require("./schema.js")
+const { reviewSchema } = require("./schema.js")
 
 //Set up EJS
 app.set("view engine", "ejs");
@@ -37,6 +38,14 @@ async function main() {
 //
 const validateListing = (req, res, next) => {
     let {error} = listingSchema.validate(req.body);
+    if (error) {
+        throw new ExpressError(400, error);
+    }   else{
+        next();
+    }
+}
+const validateReview = (req, res, next) => {
+    let {error} = reviewSchema.validate(req.body);
     if (error) {
         throw new ExpressError(400, error);
     }   else{
@@ -106,7 +115,7 @@ app.delete("/listings/:id",wrapAsync( async (req, res) => {
 }));
 
 //Reviews post rout
-app.post("/listings/:id/reviews", async(req, res) => {
+app.post("/listings/:id/reviews", validateReview, wrapAsync(async(req, res) => {
     let listing = await Listing.findById(req.params.id);
     let newReview = new Review(req.body.review);
 
@@ -116,6 +125,7 @@ app.post("/listings/:id/reviews", async(req, res) => {
 
     res.redirect(`/listings/${listing._id}`);
 })
+);
 //Test Listing
 // app.get("/testListing",async (req, res) => {
 //     let sampleListing = new Listing({
