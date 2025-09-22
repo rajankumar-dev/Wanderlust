@@ -21,6 +21,7 @@ const customerSchema =  new Schema({
     orders: [
         {
             type: Schema.Types.ObjectId,
+
             ref: "Order",
         },
     ],
@@ -34,7 +35,7 @@ customerSchema.post("findOneAndDelete", async() => {
     console.log("post Middleware");
     
 })
-const Customer = mongoose.model("Customer", customerSchema);
+const Customer1 = mongoose.model("Customer1", customerSchema);
 const Order = mongoose.model("Order", orderSchema);
 
 const addCustomer = async () => {
