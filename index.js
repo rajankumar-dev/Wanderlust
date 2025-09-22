@@ -11,6 +11,7 @@ const app = express();
 
 //require router
 const listings = require("./routes/listing.js");
+const reviews = require("./routes/review.js");
 //Joi 
 const Joi = require('joi');
 
@@ -38,54 +39,11 @@ async function main() {
 }
 
 
-const validateReview = (req, res, next) => {
-    let {error} = reviewSchema.validate(req.body);
-    if (error) {
-        throw new ExpressError(400, error);
-    }   else{
-        next();
-    }
-}
 
 app.use("/listings", listings);
 
-//Reviews post rout
-app.post("/listings/:id/reviews", validateReview, wrapAsync(async(req, res) => {
-    let listing = await Listing.findById(req.params.id);
-    let newReview = new Review(req.body.review);
+app.use("/listings/:id/reviews", reviews);
 
-    listing.reviews.push(newReview);
-    await newReview.save();
-    await listing.save();
-
-    res.redirect(`/listings/${listing._id}`);
-})
-);
-
-//review delete route
-app.delete("/listings/:id/reviews/:reviewId", wrapAsync (async (req, res) => {
-    let { id, reviewId } = req.params;
-    await Listing.findByIdAndUpdate(id, {$pull: {reviews: reviewId}});
-    await Review.findByIdAndDelete(reviewId);
-    res.redirect(`/listings/${id}`);
-}))
-
-
-//Test Listing
-// app.get("/testListing",async (req, res) => {
-//     let sampleListing = new Listing({
-//         title: "new villa",
-//         description: "in the beach",
-//         price: 1222,
-//         location: "sre",
-//         country:"india"
-//     });
-//     await sampleListing.save()
-//     .then(()=>{console.log("Listing save Successfull")})
-//     .catch((err)=>console.log(err));
-//     console.log("Sample was save");
-//     res.send("SuccessFul testing");
-// });
 
 app.use((req,res, err,) => {
     let {statusCode, message} = err;
