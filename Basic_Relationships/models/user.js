@@ -20,21 +20,21 @@ const userSchema = new Schema({
   ],
 });
 
-const User = mongoose.model("User", userSchema);
+const User1 = mongoose.model("User1", userSchema);
 
 const addUsers = async () => {
 
   let user1 = new User({
-    username: "Rajan Kumar",
+    username: "rahul Kumar",
     addresses: [
       {
-        location:"221b Baker",
+        location:"Baker",
         city: "Landon"
       },
     ],
   });
   user1.addresses.push({
-    location:"7765B WallStreet", city:"London"
+    location:"WallStreet", city:"delhi"
   });
   let result = await user1.save();
   console.log(result);
