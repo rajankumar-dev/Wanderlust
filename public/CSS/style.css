@@ -1,10 +1,10 @@
 body{
     font-family: "Plus Jakarta Sans", sans-serif !important;
-    font-weight: 400 !important;
-    font-style: normal !important;
     display: flex;
     flex-direction: column;
+    font-weight: 400 !important;
     height: 100vh;
+    font-style: normal !important;
 }
 
 /* navbar */
@@ -37,10 +37,10 @@ body{
 }
 .f-info{
     text-align: center;
-    height: 8rem;
     background-color: #ebebeb;
-    display: flex;
+    height: 8rem;
     flex-wrap: wrap;
+    display: flex;
     justify-content: center;
     align-items: space-evenly;
 }
