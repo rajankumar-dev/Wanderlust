@@ -1,12 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const Listing = require("./models/listing");
-const Review = require("./models/review");
 const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
-const wrapAsync = require("./utils/wrapAsync");
-const ExpressError = require("./utils/ExpressError");
 const app = express();
 
 //require router
@@ -14,10 +10,6 @@ const listings = require("./routes/listing.js");
 const reviews = require("./routes/review.js");
 //Joi 
 const Joi = require('joi');
-
-// Listing Schema from Joi
-const { listingSchema } = require("./schema.js")
-const { reviewSchema } = require("./schema.js")
 
 //Set up EJS
 app.set("view engine", "ejs");
