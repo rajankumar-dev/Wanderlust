@@ -14,7 +14,6 @@ const validateReview = (req, res, next) => {
         next();
     }
 }
-
 //Reviews post rout
 router.post("/", validateReview, wrapAsync(async(req, res) => {
     let listing = await Listing.findById(req.params.id);
@@ -27,7 +26,6 @@ router.post("/", validateReview, wrapAsync(async(req, res) => {
     res.redirect(`/listings/${listing._id}`);
 })
 );
-
 //review delete route
 router.delete("/:reviewId", wrapAsync (async (req, res) => {
     let { id, reviewId } = req.params;
