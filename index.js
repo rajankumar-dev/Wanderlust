@@ -4,6 +4,7 @@ const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const app = express();
+const session = require('express-session');
 
 //require router
 const listings = require("./routes/listing.js");
@@ -30,6 +31,16 @@ async function main() {
     await mongoose.connect('mongodb://127.0.0.1:27017/Wanderlust');
 }
 
+//Express Session
+app.use(session({
+    secret: 'mysecretkey',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        expires: Date.now() + 7 * 24 * 60 * 1000,
+        maxAge: 86400000,
+    }
+}));
 
 
 app.use("/listings", listings);
