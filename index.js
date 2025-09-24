@@ -5,6 +5,8 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const app = express();
 const session = require('express-session');
+const flash = require('connect-flash');
+
 
 //require router
 const listings = require("./routes/listing.js");
@@ -41,7 +43,12 @@ app.use(session({
         maxAge: 86400000,
     }
 }));
+app.use(flash());
 
+app.use((req,res, next) => {
+    res.locals.success = req.flash("success");
+    next();
+})
 
 app.use("/listings", listings);
 

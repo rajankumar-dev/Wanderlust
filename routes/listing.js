@@ -16,7 +16,7 @@ const validateListing = (req, res, next) => {
 }
 
 //Index Route
-router.get("/",wrapAsync( async (req, res) => {
+router.get("/", wrapAsync( async (req, res) => {
     const allListings = await Listing.find({});
     res.render("listings/index.ejs", {allListings});
 }));
@@ -50,6 +50,7 @@ router.post("/",validateListing, wrapAsync( async (req, res, next) => {
         }
         const newListing = new Listing(req.body.listing);
         await newListing.save();
+        req.flash("success", "New Listing Created!")
         res.redirect("/listings");
 })
 );
