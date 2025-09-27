@@ -1,5 +1,10 @@
 <% layout("/layouts/boilerPlate")-%>
-<%= success %>
+<% if (success && success.length) { %>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <%= success %>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+<% } %>
     <br>
     <h2>All Listing</h2>
     <!-- <form action="/listings/new" method="GET" >
