@@ -6,6 +6,11 @@ const ejsMate = require("ejs-mate");
 const app = express();
 const session = require('express-session');
 const flash = require('connect-flash');
+const passport = require('passport');
+const localStrategy = require('passport-local');
+const User = require('./models/user.js');
+
+
 
 
 //require router
@@ -44,6 +49,10 @@ app.use(session({
     }
 }));
 app.use(flash());
+
+//Passport
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use((req,res, next) => {
     res.locals.success = req.flash("success");
