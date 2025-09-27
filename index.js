@@ -7,7 +7,7 @@ const app = express();
 const session = require('express-session');
 const flash = require('connect-flash');
 const passport = require('passport');
-const localStrategy = require('passport-local');
+const LocalStrategy = require('passport-local');
 const User = require('./models/user.js');
 
 
@@ -53,6 +53,9 @@ app.use(flash());
 //Passport
 app.use(passport.initialize());
 app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 app.use((req,res, next) => {
     res.locals.success = req.flash("success");
