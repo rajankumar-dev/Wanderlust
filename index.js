@@ -10,13 +10,12 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./models/user.js');
 
+//Router
+const listingRouter = require("./routes/listing.js");
+const reviewRouter = require("./routes/review.js");
+const userRouter = require("./routes/user.js");
 
-
-
-//require router
-const listings = require("./routes/listing.js");
-const reviews = require("./routes/review.js");
-//Joi 
+//Joi
 const Joi = require('joi');
 
 //Set up EJS
@@ -62,9 +61,9 @@ app.use((req,res, next) => {
     next();
 })
 
-app.use("/listings", listings);
-
-app.use("/listings/:id/reviews", reviews);
+app.use("/listings", listingRouter);
+app.use("/listings/:id/reviews", reviewRouter);
+app.use("/", userRouter);
 
 
 app.use((req,res, err,) => {
